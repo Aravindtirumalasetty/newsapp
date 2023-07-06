@@ -1,0 +1,47 @@
+.header{
+    text-align: center;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.newscontainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1.5rem;
+}
+.image {
+    border-radius: 3rem;
+  width: 25rem;
+  height: 15rem;
+}
+article {
+  width: 25rem;
+  height: 30rem;
+  padding: 1rem;
+  border: 1px solid black;
+  position: relative;
+  box-shadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem 5rem 1rem 5rem;
+}
+.view{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    border: 1px solid grey;
+    padding: 0.5rem;
+  transition: all 0.2s ease;
+  border-radius: 5rem;
+  background: #063353;
+  color: white;
+}
+.view:hover{
+    background: #174e75;
+    transform: scaleX(1.1);
+}
