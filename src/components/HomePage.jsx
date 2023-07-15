@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "../components/HomePage.module.css";
+import { FaSearch } from "react-icons/fa";
 import axios from "axios";
-import { Carousel, CarouselItem, Image } from "react-bootstrap";
+
 export const HomePage = () => {
   const [news, setNews] = useState([]);
   const [searchnews, setsearchNews] = useState([]);
-  const [topic,setTopic]=useState("");
-  
+  const [topic, setTopic] = useState("");
+
   const handleClick = () => {
     if (topic !== "") {
       const api = `https://newsapi.org/v2/everything?q=${topic}&from=2023-07-11&sortBy=popularity&apiKey=680fdb2b7b284742ae6299b7054b7db3`;
@@ -19,6 +20,7 @@ export const HomePage = () => {
         .catch((err) => console.log(err));
     }
   };
+
   useEffect(() => {
     axios
       .get(
@@ -31,55 +33,82 @@ export const HomePage = () => {
   }, []);
   return (
     <>
-      <h1 className={`${styles.header}`}>Hello Aravind! Your briefing</h1>
-      <div className={`${styles.searchbar}`}>
+      <div className={`${styles.navbar}`}>
+        <div className={`${styles.navlinks}`}>
+          <span
+            className={`${styles.link}`}
+            onClick={() => setTopic("bitcoin")}
+          >
+            Bitcoin
+          </span>
+          <span className={`${styles.link}`} 
+          onClick={() => setTopic("sports")}>
+            Sports
+          </span>
+          <span
+            className={`${styles.link}`}
+            onClick={() => setTopic("ecommerce")}
+          >
+            Ecommerce
+          </span>
+        </div>
+        <div className={`${styles.searchbar}`}>
           <input
             type="text"
-            placeholder="Enter topic"
+            placeholder="Search to Explore more!"
             onChange={(e) => setTopic(e.target.value)}
             className={`${styles.input}`}
           />
           <button onClick={handleClick} className={`${styles.searchbtn}`}>
-            Search
+            <FaSearch />
           </button>
         </div>
+      </div>
+      <div>
+        <h1 className={`${styles.header}`}>Hello Aravind! Your briefing</h1>
+      </div>
       <section className={`${styles.newscontainer}`}>
-        {(searchnews.length!=0?searchnews:news).slice(0,25).map((newsitem, index) => {
-          const {
-            author,
-            content,
-            description,
-            source,
-            publishedAt,
-            title,
-            url,
-            urlToImage,
-          } = newsitem;
-          return (
-            <article key={index}>
-              {urlToImage ? (
-                <img
-                  src={urlToImage}
-                  alt="Dynamic Image"
-                  className={`${styles.image}`}
-                />
-              ) : (
-                <img
-                  src="/images/noimage.png"
-                  alt="Default Image"
-                  className={`${styles.image}`}
-                />
-              )}
-              <div className={styles.info}>
-                <h2> {title!=null?title.slice(0,150)+"...":title}</h2>
-                {/* <p>{description!=null?description.slice(0,200)+"...":description}</p> */}
-                <a href={url} className={`${styles.view}`}>
-                  View More
-                </a>
-              </div>
-            </article>
-          );
-        })}
+        {(searchnews.length != 0 ? searchnews : news)
+          .slice(0, 25)
+          .map((newsitem, index) => {
+            const {
+              author,
+              content,
+              description,
+              source,
+              publishedAt,
+              title,
+              url,
+              urlToImage,
+            } = newsitem;
+            return (
+              <article key={index}>
+                {urlToImage ? (
+                  <img
+                    src={urlToImage}
+                    alt="Dynamic Image"
+                    className={`${styles.image}`}
+                  />
+                ) : (
+                  <img
+                    src="/images/noimage.png"
+                    alt="Default Image"
+                    className={`${styles.image}`}
+                  />
+                )}
+                <div className={styles.info}>
+                  <h2>
+                    {" "}
+                    {title != null ? title.slice(0, 150) + "..." : title}
+                  </h2>
+                  {/* <p>{description!=null?description.slice(0,200)+"...":description}</p> */}
+                  <a href={url} className={`${styles.view}`}>
+                    View More
+                  </a>
+                </div>
+              </article>
+            );
+          })}
       </section>
     </>
   );
