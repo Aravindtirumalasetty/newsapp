@@ -72,11 +72,6 @@ export const HomePage = () => {
           .slice(0, 25)
           .map((newsitem, index) => {
             const {
-              author,
-              content,
-              description,
-              source,
-              publishedAt,
               title,
               url,
               urlToImage,
