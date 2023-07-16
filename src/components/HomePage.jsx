@@ -36,6 +36,8 @@ export const HomePage = () => {
       <div className={`${styles.navbar}`}>
         <div className={`${styles.navlinks}`}>
           <input type="button" value="bitcoin" onClick={(e)=>handleClick(e.target.value)}/>
+          <input type="button" value="cricket" onClick={(e)=>handleClick(e.target.value)}/>
+          <input type="button" value="amazon" onClick={(e)=>handleClick(e.target.value)}/>
           {/* <span className={`${styles.link}`} onClick={() => setTopic("sports")}>
             Sports
           </span>
