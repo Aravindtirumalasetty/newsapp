@@ -8,9 +8,9 @@ export const HomePage = () => {
   const [searchnews, setsearchNews] = useState([]);
   const [topic, setTopic] = useState("");
 
-  const handleClick = () => {
-    if (topic !== "") {
-      const api = `https://newsapi.org/v2/everything?q=${topic}&from=2023-07-11&sortBy=popularity&apiKey=680fdb2b7b284742ae6299b7054b7db3`;
+  const handleClick = (e) => {
+    if (e!== "") {
+      const api = `https://newsapi.org/v2/everything?q=${e}&from=2023-07-11&sortBy=popularity&apiKey=680fdb2b7b284742ae6299b7054b7db3`;
       axios
         .get(api)
         .then((res) => {
@@ -20,10 +20,7 @@ export const HomePage = () => {
         .catch((err) => console.log(err));
     }
   };
-  useEffect(() => {
-    handleClick();
-    setTopic("");
-  }, [topic]);
+
   useEffect(() => {
     axios
       .get(
@@ -38,13 +35,8 @@ export const HomePage = () => {
     <>
       <div className={`${styles.navbar}`}>
         <div className={`${styles.navlinks}`}>
-          <span
-            className={`${styles.link}`}
-            onClick={() => setTopic("bitcoin")}
-          >
-            Bitcoin
-          </span>
-          <span className={`${styles.link}`} onClick={() => setTopic("sports")}>
+          <input type="button" value="bitcoin" onClick={(e)=>handleClick(e.target.value)}/>
+          {/* <span className={`${styles.link}`} onClick={() => setTopic("sports")}>
             Sports
           </span>
           <span
@@ -52,7 +44,7 @@ export const HomePage = () => {
             onClick={() => setTopic("ecommerce")}
           >
             Ecommerce
-          </span>
+          </span> */}
         </div>
         <div className={`${styles.searchbar}`}>
           <input
@@ -61,7 +53,7 @@ export const HomePage = () => {
             onChange={(e) => setTopic(e.target.value)}
             className={`${styles.input}`}
           />
-          <button onClick={handleClick} className={`${styles.searchbtn}`}>
+          <button onClick={()=>handleClick(topic)} className={`${styles.searchbtn}`}>
             <FaSearch />
           </button>
         </div>
