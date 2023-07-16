@@ -20,7 +20,10 @@ export const HomePage = () => {
         .catch((err) => console.log(err));
     }
   };
-
+  useEffect(() => {
+    handleClick();
+    setTopic("");
+  }, [topic]);
   useEffect(() => {
     axios
       .get(
@@ -30,7 +33,7 @@ export const HomePage = () => {
         // console.log(res);
         setNews(res.data.articles);
       });
-  }, []);
+  },[]);
   return (
     <>
       <div className={`${styles.navbar}`}>
@@ -41,8 +44,7 @@ export const HomePage = () => {
           >
             Bitcoin
           </span>
-          <span className={`${styles.link}`} 
-          onClick={() => setTopic("sports")}>
+          <span className={`${styles.link}`} onClick={() => setTopic("sports")}>
             Sports
           </span>
           <span
@@ -68,26 +70,22 @@ export const HomePage = () => {
         <h1 className={`${styles.header}`}>Hello Aravind! Your briefing</h1>
       </div>
       <section className={`${styles.newscontainer}`}>
-        {(searchnews.length != 0 ? searchnews : news)
+        {(searchnews.length !==0 ? searchnews : news)
           .slice(0, 25)
           .map((newsitem, index) => {
-            const {
-              title,
-              url,
-              urlToImage,
-            } = newsitem;
+            const { title, url, urlToImage } = newsitem;
             return (
               <article key={index}>
                 {urlToImage ? (
                   <img
                     src={urlToImage}
-                    alt="Dynamic Image"
+                    alt="Dynamic"
                     className={`${styles.image}`}
                   />
                 ) : (
                   <img
                     src="/images/noimage.png"
-                    alt="Default Image"
+                    alt="Default"
                     className={`${styles.image}`}
                   />
                 )}
